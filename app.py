@@ -24,6 +24,7 @@ def extract_ash_paper_info(url):
         # 'title': title,
         # 'session': session_info,
         # 'authors': authors,
+        'sourceUrl': url,
         'abstract': abstract,
         'html': full_html
     }
