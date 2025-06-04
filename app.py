@@ -19,7 +19,7 @@ def extract_abstract_and_html(item):
         abstract = abstract_tag.get_text(strip=True) if abstract_tag else ''
 
         item['abstract'] = abstract
-        item['markdown'] = soup.prettify()  # or convert to real markdown if needed
+        item['html'] = soup.prettify()
 
         return item
     except Exception as e:
