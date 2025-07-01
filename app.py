@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
+import html2text
 from concurrent.futures import ThreadPoolExecutor
 
 app = Flask(__name__)
@@ -17,9 +18,14 @@ def extract_abstract_and_html(item):
 
         abstract_tag = soup.find('div', class_='abstract')
         abstract = abstract_tag.get_text(strip=True) if abstract_tag else ''
+        
+        h = html2text.HTML2Text()
+        h.ignore_links = False  # Set to True if you want to ignore links
+        markdown_text = h.handle(soup.get_text(strip=True))
 
-        item['abstract'] = abstract
+        item['markdown'] = markdown_text
         item['html'] = soup.prettify()
+        item['abstract'] = abstract
 
         return item
     except Exception as e:
