@@ -21,6 +21,7 @@ def extract_abstract_and_html(item):
         
         h = html2text.HTML2Text()
         h.ignore_links = False  # Set to True if you want to ignore links
+        # also get the markdown text
         markdown_text = h.handle(soup.get_text(strip=True))
 
         item['markdown'] = markdown_text
